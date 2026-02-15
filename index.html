@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Full-Stack App (Student Build)</title>
     
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
@@ -16,7 +21,7 @@
     <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#/">Full-Stack App (French Cyril B. Sambilad)</a>
+            <a class="navbar-brand" href="#/">Full-Stack App (French Cyril Sambilad)</a>
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -32,17 +37,6 @@
                         <a class="nav-link" href="#/register">Register</a>
                     </li>
                     
-                    <!-- Admin Only Links -->
-                    <li class="nav-item role-admin">
-                        <a class="nav-link" href="#/employees">Employees</a>
-                    </li>
-                    <li class="nav-item role-admin">
-                        <a class="nav-link" href="#/accounts">Accounts</a>
-                    </li>
-                    <li class="nav-item role-admin">
-                        <a class="nav-link" href="#/departments">Departments</a>
-                    </li>
-                    
                     <!-- Logged In Dropdown -->
                     <li class="nav-item dropdown role-logged-in">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
@@ -51,6 +45,15 @@
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" href="#/profile">Profile</a></li>
                             <li><a class="dropdown-item" href="#/requests">My Requests</a></li>
+                            
+                            <!-- Admin Only Links in Dropdown -->
+                            <li class="role-admin"><hr class="dropdown-divider"></li>
+                            <li class="role-admin"><h6 class="dropdown-header">Admin Panel</h6></li>
+                            <li class="role-admin"><a class="dropdown-item" href="#/employees">Employees</a></li>
+                            <li class="role-admin"><a class="dropdown-item" href="#/accounts">Accounts</a></li>
+                            <li class="role-admin"><a class="dropdown-item" href="#/departments">Departments</a></li>
+                            <li class="role-admin"><a class="dropdown-item" href="#/all-requests">All Requests</a></li>
+                            
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item text-danger" href="#" id="logout-btn">Logout</a></li>
                         </ul>
@@ -67,20 +70,45 @@
         <section id="home-page" class="page active">
             <div class="row justify-content-center">
                 <div class="col-lg-8">
-                    <h1>Welcome to Full-Stack App</h1>
-                    <p class="lead">A static prototype before backend integration. Simulates:</p>
-                    <ul>
-                        <li>Email registration + fake verification</li>
-                        <li>Login with JWT-like token simulation</li>
-                        <li>Role-based UI (Admin/User)</li>
-                        <li>CRUD for Employees, Departments, Requests</li>
-                    </ul>
-                    
-                    <div class="alert alert-info">
-                        <strong>⚠ Note:</strong> All data is stored in <code>localStorage</code>. Refresh to reset.
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h1 class="mb-3">Welcome to Full-Stack App</h1>
+                            <p class="lead mb-4">A modern prototype demonstrating full-stack capabilities</p>
+                            
+                            <div class="row g-3 mb-4">
+                                <div class="col-md-6">
+                                    <div class="feature-box p-3 bg-light rounded">
+                                        <h5 class="text-primary">✉️ Email Registration</h5>
+                                        <p class="mb-0 small text-muted">Simulated verification flow</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="feature-box p-3 bg-light rounded">
+                                        <h5 class="text-primary">🔐 Secure Authentication</h5>
+                                        <p class="mb-0 small text-muted">JWT-like token system</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="feature-box p-3 bg-light rounded">
+                                        <h5 class="text-primary">👥 Role-Based Access</h5>
+                                        <p class="mb-0 small text-muted">Admin & User permissions</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="feature-box p-3 bg-light rounded">
+                                        <h5 class="text-primary">📊 CRUD Operations</h5>
+                                        <p class="mb-0 small text-muted">Full data management</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="alert alert-info">
+                                <strong>⚠️ Note:</strong> All data is stored in <code>localStorage</code>. Refresh to reset.
+                            </div>
+                            
+                            <button class="btn btn-primary btn-lg" onclick="navigateTo('#/register')">Get Started →</button>
+                        </div>
                     </div>
-                    
-                    <button class="btn btn-primary" onclick="navigateTo('#/register')">Get Started →</button>
                 </div>
             </div>
         </section>
@@ -110,9 +138,20 @@
                                     <input type="password" class="form-control" id="reg-password" minlength="6" required>
                                     <small class="text-muted">Minimum 6 characters</small>
                                 </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Confirm Password</label>
+                                    <input type="password" class="form-control" id="reg-confirm-password" minlength="6" required>
+                                    <small class="text-muted">Re-enter your password</small>
+                                </div>
                                 <button type="submit" class="btn btn-success">Sign Up</button>
                                 <button type="button" class="btn btn-secondary" onclick="navigateTo('#/')">Cancel</button>
                             </form>
+                            
+                            <hr class="my-4">
+                            
+                            <div class="text-center">
+                                <p class="mb-0">Already have an account? <a href="#/login" class="text-primary fw-bold">Login here</a></p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -145,6 +184,14 @@
                     <div class="card">
                         <div class="card-body">
                             <h2 class="card-title">Login</h2>
+                            
+                            <!-- Demo Credentials Info -->
+                            <div class="alert alert-info">
+                                <strong>ℹ️ Demo Credentials:</strong><br>
+                                <strong>Email:</strong> admin@example.com<br>
+                                <strong>Password:</strong> Password123!
+                            </div>
+                            
                             <div id="login-message"></div>
                             <form id="login-form">
                                 <div class="mb-3">
@@ -158,6 +205,12 @@
                                 <button type="submit" class="btn btn-primary">Login</button>
                                 <button type="button" class="btn btn-secondary" onclick="navigateTo('#/')">Cancel</button>
                             </form>
+                            
+                            <hr class="my-4">
+                            
+                            <div class="text-center">
+                                <p class="mb-0">Don't have an account? <a href="#/register" class="text-primary fw-bold">Register here</a></p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -183,40 +236,6 @@
             <h2>Employees</h2>
             <button class="btn btn-success mb-3" id="add-employee-btn">+ Add Employee</button>
             
-            <div id="employee-form-container" style="display: none;">
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <h5>Add/Edit Employee</h5>
-                        <form id="employee-form">
-                            <input type="hidden" id="emp-edit-id">
-                            <div class="mb-3">
-                                <label class="form-label">Employee ID</label>
-                                <input type="text" class="form-control" id="emp-id" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">User Email</label>
-                                <input type="email" class="form-control" id="emp-email" required>
-                                <small class="text-muted">Must match an existing account</small>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Position</label>
-                                <input type="text" class="form-control" id="emp-position" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Department</label>
-                                <select class="form-control" id="emp-department" required></select>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Hire Date</label>
-                                <input type="date" class="form-control" id="emp-hire-date" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Save</button>
-                            <button type="button" class="btn btn-secondary" id="cancel-employee-btn">Cancel</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
@@ -238,7 +257,7 @@
         <!-- Departments Page (Admin) -->
         <section id="departments-page" class="page">
             <h2>Departments</h2>
-            <button class="btn btn-success mb-3" onclick="alert('Add Department - Not implemented yet')">+ Add Department</button>
+            <button class="btn btn-success mb-3" id="add-department-btn">+ Add Department</button>
             
             <div class="table-responsive">
                 <table class="table table-striped">
@@ -258,46 +277,6 @@
         <section id="accounts-page" class="page">
             <h2>Accounts</h2>
             <button class="btn btn-success mb-3" id="add-account-btn">+ Add Account</button>
-            
-            <div id="account-form-container" style="display: none;">
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <h5>Add/Edit Account</h5>
-                        <form id="account-form">
-                            <input type="hidden" id="acc-edit-email">
-                            <div class="mb-3">
-                                <label class="form-label">First Name</label>
-                                <input type="text" class="form-control" id="acc-firstname" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Last Name</label>
-                                <input type="text" class="form-control" id="acc-lastname" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Email</label>
-                                <input type="email" class="form-control" id="acc-email" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Password</label>
-                                <input type="password" class="form-control" id="acc-password" minlength="6" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Role</label>
-                                <select class="form-control" id="acc-role" required>
-                                    <option value="User">User</option>
-                                    <option value="Admin">Admin</option>
-                                </select>
-                            </div>
-                            <div class="mb-3 form-check">
-                                <input type="checkbox" class="form-check-input" id="acc-verified">
-                                <label class="form-check-label">Verified</label>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Save</button>
-                            <button type="button" class="btn btn-secondary" id="cancel-account-btn">Cancel</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
             
             <div class="table-responsive">
                 <table class="table table-striped">
@@ -321,6 +300,13 @@
             <button class="btn btn-success mb-3" id="new-request-btn">+ New Request</button>
             
             <div id="requests-content"></div>
+        </section>
+        
+        <!-- All Requests Page (Admin) -->
+        <section id="all-requests-page" class="page">
+            <h2>All Requests</h2>
+            
+            <div id="all-requests-content"></div>
         </section>
         
     </main>
@@ -355,6 +341,221 @@
                             <button type="button" class="btn btn-sm btn-secondary" id="add-item-btn">+ Add Item</button>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit Request</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Edit Profile Modal -->
+    <div class="modal fade" id="editProfileModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Profile</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="edit-profile-form">
+                        <div class="text-center mb-4">
+                            <div class="profile-avatar">
+                                <div class="avatar-circle" id="edit-avatar-preview"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">First Name</label>
+                            <input type="text" class="form-control" id="edit-firstname" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Last Name</label>
+                            <input type="text" class="form-control" id="edit-lastname" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" id="edit-email" readonly>
+                            <small class="text-muted">Email cannot be changed</small>
+                        </div>
+                        
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Change Password Modal -->
+    <div class="modal fade" id="changePasswordModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Change Password</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="change-password-form">
+                        <div class="mb-3">
+                            <label class="form-label">Current Password</label>
+                            <input type="password" class="form-control" id="current-password" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">New Password</label>
+                            <input type="password" class="form-control" id="new-password" minlength="6" required>
+                            <small class="text-muted">Minimum 6 characters</small>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Confirm New Password</label>
+                            <input type="password" class="form-control" id="confirm-password" minlength="6" required>
+                        </div>
+                        
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Change Password</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Department Modal -->
+    <div class="modal fade" id="departmentModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="department-modal-title">Add Department</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="department-form">
+                        <input type="hidden" id="dept-edit-id">
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Department Name</label>
+                            <input type="text" class="form-control" id="dept-name" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <textarea class="form-control" id="dept-description" rows="3" required></textarea>
+                        </div>
+                        
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Save Department</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Employee Modal -->
+    <div class="modal fade" id="employeeModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="employee-modal-title">Add Employee</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="employee-form">
+                        <input type="hidden" id="emp-edit-id">
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Employee ID</label>
+                            <input type="text" class="form-control" id="emp-id" required>
+                            <small class="text-muted">Any format (e.g., 1, EMP001, A123)</small>
+                        </div>
+                        
+                        <div class="mb-3" id="emp-email-container">
+                            <label class="form-label">User Email</label>
+                            <select class="form-control" id="emp-email" required></select>
+                            <small class="text-muted">Select from registered accounts</small>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Position</label>
+                            <input type="text" class="form-control" id="emp-position" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Department</label>
+                            <select class="form-control" id="emp-department" required></select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Hire Date</label>
+                            <input type="date" class="form-control" id="emp-hire-date" required>
+                        </div>
+                        
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Save Employee</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Account Modal -->
+    <div class="modal fade" id="accountModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="account-modal-title">Add Account</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="account-form">
+                        <input type="hidden" id="acc-edit-email">
+                        
+                        <div class="mb-3">
+                            <label class="form-label">First Name</label>
+                            <input type="text" class="form-control" id="acc-firstname" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Last Name</label>
+                            <input type="text" class="form-control" id="acc-lastname" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" id="acc-email" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-control" id="acc-password" minlength="6" required>
+                            <small class="text-muted">Minimum 6 characters</small>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Role</label>
+                            <select class="form-control" id="acc-role" required>
+                                <option value="User">User</option>
+                                <option value="Admin">Admin</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="acc-verified">
+                            <label class="form-check-label">Verified</label>
+                        </div>
+                        
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Save Account</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        </div>
                     </form>
                 </div>
             </div>
